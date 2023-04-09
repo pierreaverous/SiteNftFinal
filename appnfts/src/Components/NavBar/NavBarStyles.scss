@@ -1,0 +1,36 @@
+.NavBar{
+  display: flex;
+  flex-direction: row;
+  height: 100px;
+  background-color: rgb(245,159,30);
+  justify-content: space-between;
+}
+.logo{
+  margin-left: 50px;
+}
+.containerLinkPage{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.plinkPage{
+  width: 200px;
+}
+.HeaderLink{
+  color: black;
+  margin-right: 40px;
+  text-decoration: none;
+  transition: transform 2s ease-in-out;
+  padding-bottom:20px ;
+}
+
+.HeaderLink:hover {
+  font-size: 18px;
+  transform: rotate(360deg);
+  color: black;
+  border-bottom-style: solid;
+  border-bottom-width: 3px;
+  font-weight: bold;
+
+}
