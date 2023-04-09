@@ -23,6 +23,7 @@ const checkMintedStatus = async (setMinted) => {
   setMinted(updatedMintedStatus);
 };
 
+
 const setNftSpecificPrice = async (edition, newPrice, fetchData, setError) => {
   if (typeof window.ethereum !== 'undefined') {
     try {
