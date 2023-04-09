@@ -7,7 +7,8 @@ import dataNft from '../../JSON/CollectionLEAUMetaDonnés.json';
 import NavBar from "../../Components/NavBar/NavBar";
 import {useMinted} from "../../MintedContext";
 
-const smartcontratAdress = '0x6923ee63f2ccA8Fabd93b2FfA8AB0c1CfDFa8561';
+const smartcontratAdress = '0x1f834F3a99afe149F5A5Ea85Acc3B39D2535574f';
+
 
 const checkMintedStatus = async (setMinted) => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -15,8 +16,12 @@ const checkMintedStatus = async (setMinted) => {
 
     const updatedMintedStatus = {};
     for (const nft of dataNft) {
-        const isMinted = await contract._exists(nft.edition);
-        updatedMintedStatus[nft.edition] = isMinted;
+        try {
+            await contract.ownerOf(nft.edition);
+            updatedMintedStatus[nft.edition] = true;
+        } catch (error) {
+            updatedMintedStatus[nft.edition] = false;
+        }
     }
     setMinted(updatedMintedStatus);
 };

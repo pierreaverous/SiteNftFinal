@@ -1,6 +1,6 @@
 {
-  "short_name": "remi benard",
-  "name": "remi benard",
+  "short_name": "React App",
+  "name": "Create React App Sample",
   "icons": [
     {
       "src": "remi.png",

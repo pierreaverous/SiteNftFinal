@@ -17,12 +17,15 @@ const checkMintedStatus = async (setMinted) => {
 
   const updatedMintedStatus = {};
   for (const nft of dataNft) {
-    const isMinted = await contract._exists(nft.edition);
-    updatedMintedStatus[nft.edition] = isMinted;
+    try {
+      await contract.ownerOf(nft.edition);
+      updatedMintedStatus[nft.edition] = true;
+    } catch (error) {
+      updatedMintedStatus[nft.edition] = false;
+    }
   }
   setMinted(updatedMintedStatus);
 };
-
 
 const setNftSpecificPrice = async (edition, newPrice, fetchData, setError) => {
   if (typeof window.ethereum !== 'undefined') {

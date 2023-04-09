@@ -21,7 +21,7 @@ const NavBar = () =>  {
                             <Link  className='HeaderLink' to="https://benardremi17.wixsite.com/remi-benard">Retour Site Web</Link>
                         </p>
                         <p className='plinkPage'>
-                            <Link  className='HeaderLink' to="/">Acceuil</Link>
+                            <Link  className='HeaderLink' to="/">Accueil</Link>
                         </p>
                     </div>
                     <ConnectWalletButton/>

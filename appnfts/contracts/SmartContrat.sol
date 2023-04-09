@@ -30,22 +30,6 @@ contract SmartContrat is ERC721Enumerable, Ownable {
     return baseURI;
   }
 
-  // public
-//  function mint(address _to, uint256 _edition) public payable {
-//    uint256 supply = totalSupply();
-//    require(!paused);
-//    require(supply < maxSupply, "Maximum supply reached");
-//    require(_edition <= maxSupply, "Edition exceeds max supply");
-//    require(!_exists(_edition), "Edition already minted");
-//
-//    if (msg.sender != owner()) {
-//      if(whitelisted[msg.sender] != true) {
-//        require(msg.value >= cost, "Insufficient funds");
-//      }
-//    }
-//
-//    _safeMint(_to, _edition);
-//  }
   function setNftSpecificPrice(uint256 _edition, uint256 _price) public onlyOwner {
     require(_edition > 0, "Edition must be greater than 0");
     require(_edition <= maxSupply, "Edition exceeds max supply");
@@ -138,5 +122,6 @@ contract SmartContrat is ERC721Enumerable, Ownable {
     require(payable(msg.sender).send(address(this).balance));
   }
 
- }
+
+}
 
