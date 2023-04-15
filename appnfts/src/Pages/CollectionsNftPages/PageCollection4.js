@@ -118,6 +118,9 @@ const PageCollection4 = () => {
     const [nftData, setNftData] = useState([]);
     const [isMinted, setIsMinted] = useState(false);
     const { minted, setMinted } = useMinted();
+    const [targetAddresses, setTargetAddresses] = useState({});
+
+
 
 
 
@@ -138,6 +141,13 @@ const PageCollection4 = () => {
         fetchData();
         getAccounts();
         setNftData(dataNft);
+        setTargetAddresses({
+            1: '0x523e828681c8fd860f90fbce6795f49c5b6877df',
+            5: '0xa4ece91aeb024a85bd2a74cd3453deefddafa760',
+            // Ajoutez d'autres paires d'identifiants de token et d'adresses ici
+        });
+        console.log(setTargetAddresses)
+
     }, []);
 
     const getAccounts = async () => {
@@ -215,6 +225,7 @@ const PageCollection4 = () => {
         }
     }
 
+
     return (
 
         <>
@@ -222,18 +233,46 @@ const PageCollection4 = () => {
             <div className="App">
                 <div className="container">
                     <div className="nft-gallery">
-                        {nftData.map((nft) => (
-                            <NFTCard key={nft.edition}
-                                     nft={nft}
-                                     mintFunction={mint}
-                                     fetchData={fetchData}
-                                     setError={setError}
-                                     account={account}
-                                     setIsMinted={setIsMinted}
+                        {nftData.map((nft) => {
+                            if  (window.ethereum.selectedAddress === targetAddresses[nft.edition]) {
+                                return (
+                                    <NFTCard
+                                        key={nft.edition}
+                                        nft={nft}
+                                        mintFunction={mint}
+                                        fetchData={fetchData}
+                                        setError={setError}
+                                        account={account}
+                                        setIsMinted={setIsMinted}
+                                    />
+                                );
+                            }else if (account[0] === "0x0ca22262c953bf13f89be2e1ff1742f9d227b18c") {
+                                return (
+                                    <NFTCard
+                                        key={nft.edition}
+                                        nft={nft}
+                                        mintFunction={mint}
+                                        fetchData={fetchData}
+                                        setError={setError}
+                                        account={account}
+                                        setIsMinted={setIsMinted}
+                                    />
+                                );
+                            }
+                            return null;
+                            // return (
+                            //     <NFTCard
+                            //         key={nft.edition}
+                            //         nft={nft}
+                            //         mintFunction={mint}
+                            //         fetchData={fetchData}
+                            //         setError={setError}
+                            //         account={account}
+                            //         setIsMinted={setIsMinted}
+                            //     />
+                            // );
 
-
-                            />
-                        ))}
+                        })}
                     </div>
                     <p className="count">
                         {data.totalSupply}/{data.maxSupply}
