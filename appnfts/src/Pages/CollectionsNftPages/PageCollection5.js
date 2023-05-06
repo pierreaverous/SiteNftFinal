@@ -3,12 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 import SmartContrat from '../../artifacts/contracts/SmartContrat.sol/SmartContrat.json';
 import './CollectionsStyles.scss';
-import dataNft from '../../JSON/CollectionUniversMetaDonnés.json';
+import dataNft from '../../JSON/UniversJson/_metadata.json';
 import NavBar from "../../Components/NavBar/NavBar";
 import {useMinted} from "../../MintedContext";
 
 
-const smartcontratAdress = '0x880ccE857f5429E209Ff6318405045CD574Df250';
+const smartcontratAdress = '0xA100a7F9BDD9DdBe95DE6930f9BBC5004e943Fd5';
 const checkMintedStatus = async (setMinted) => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const contract = new ethers.Contract(smartcontratAdress, SmartContrat.abi, provider);
@@ -114,6 +114,8 @@ const PageCollection5 = () => {
     const [nftData, setNftData] = useState([]);
     const [isMinted, setIsMinted] = useState(false);
     const { minted, setMinted } = useMinted();
+    const [targetAddresses, setTargetAddresses] = useState({});
+
 
 
     useEffect(() => {
@@ -133,7 +135,15 @@ const PageCollection5 = () => {
         fetchData();
         getAccounts();
         setNftData(dataNft);
+        setTargetAddresses({
+            1: '0x523e828681c8fd860f90fbce6795f49c5b6877df',
+            2: '0xa4ece91aeb024a85bd2a74cd3453deefddafa760',
+            // Ajoutez d'autres paires d'identifiants de token et d'adresses ici
+        });
+        console.log(setTargetAddresses)
+
     }, []);
+
 
     const getAccounts = async () => {
         if (typeof window.ethereum !== 'undefined') {
@@ -219,17 +229,35 @@ const PageCollection5 = () => {
             <div className="App">
                 <div className="container">
                     <div className="nft-gallery">
-                        {nftData.map((nft) => (
-                            <NFTCard key={nft.edition}
-                                     nft={nft}
-                                     mintFunction={mint}
-                                     fetchData={fetchData}
-                                     setError={setError}
-                                     account={account}
-                                     setIsMinted={setIsMinted}
-                            />
+                        {nftData.map((nft) => {
+                            if  (window.ethereum.selectedAddress === targetAddresses[nft.edition]) {
+                                return (
+                                    <NFTCard
+                                        key={nft.edition}
+                                        nft={nft}
+                                        mintFunction={mint}
+                                        fetchData={fetchData}
+                                        setError={setError}
+                                        account={account}
+                                        setIsMinted={setIsMinted}
+                                    />
+                                );
+                            }else if (account[0] === "0x0ca22262c953bf13f89be2e1ff1742f9d227b18c") {
+                                return (
+                                    <NFTCard
+                                        key={nft.edition}
+                                        nft={nft}
+                                        mintFunction={mint}
+                                        fetchData={fetchData}
+                                        setError={setError}
+                                        account={account}
+                                        setIsMinted={setIsMinted}
+                                    />
+                                );
+                            }
+                            return null;
 
-                        ))}
+                        })}
                     </div>
                     <p className="count">
                         {data.totalSupply}/{data.maxSupply}
@@ -254,6 +282,7 @@ const PageCollection5 = () => {
                 </div>
             </div>
         </>
+
     );
 }
 export default PageCollection5;

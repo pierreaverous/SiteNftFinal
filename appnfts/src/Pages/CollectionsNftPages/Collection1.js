@@ -3,13 +3,12 @@ import { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 import SmartContrat from '../../artifacts/contracts/SmartContrat.sol/SmartContrat.json';
 import './CollectionsStyles.scss';
-import dataNft from '../../JSON/CollectionMagieCelteMetaDonnés.json';
-import { Link } from 'react-router-dom';
+import dataNft from '../../JSON/MagieCelteJson/CollectionMagieCelteMetaDonnés.json';
 import NavBar from "../../Components/NavBar/NavBar";
 import {useMinted} from "../../MintedContext";
 
 
-const smartcontratAdress = '0xf0409E4f936786E4283843ee58E3b2E9305f6B8A';
+const smartcontratAdress = '0xCc7f25A5Ee8a611b3931cF52C5B69956D5Aa9F64';
 
 const checkMintedStatus = async (setMinted) => {
   const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -112,11 +111,13 @@ const NFTCard = ({ nft, mintFunction, setPriceFunction, fetchData, setError, acc
 
 const PageCollection1 = () => {
   const [error, setError] = useState('');
-  const [data, setData] = useState({});
   const [account, setAccount] = useState([]);
   const [nftData, setNftData] = useState([]);
   const [isMinted, setIsMinted] = useState(false);
   const { minted, setMinted } = useMinted();
+  const [targetAddresses, setTargetAddresses] = useState({});
+  const [data, setData] = useState({ cost: '', totalSupply: '', maxSupply: '' });
+
 
 
 
@@ -137,6 +138,13 @@ const PageCollection1 = () => {
     fetchData();
     getAccounts();
     setNftData(dataNft);
+    setTargetAddresses({
+      1: '0x523e828681c8fd860f90fbce6795f49c5b6877df',
+      5: '0xa4ece91aeb024a85bd2a74cd3453deefddafa760',
+      // Ajoutez d'autres paires d'identifiants de token et d'adresses ici
+    });
+    console.log(setTargetAddresses)
+
   }, []);
 
   const getAccounts = async () => {
@@ -158,13 +166,15 @@ const PageCollection1 = () => {
       try {
         const cost = await contract.cost();
         const totalSupply = await contract.totalSupply();
-        const object = {cost: String(cost), totalSupply: String(totalSupply)};
+        const maxSupply = await contract.maxSupply(); // Ajoutez cette ligne pour récupérer la valeur maxSupply
+        const object = { cost: String(cost), totalSupply: String(totalSupply), maxSupply: String(maxSupply) }; // Incluez maxSupply dans l'objet
         setData(object);
       } catch (err) {
         setError(err.message);
       }
     }
   };
+
   async function mint(edition) {
     if (typeof window.ethereum !== "undefined") {
       try {
@@ -222,18 +232,24 @@ const PageCollection1 = () => {
         <div className="App">
           <div className="container">
             <div className="nft-gallery">
-              {nftData.map((nft) => (
-                  <NFTCard key={nft.edition}
-                           nft={nft}
-                           mintFunction={mint}
-                           fetchData={fetchData}
-                           setError={setError}
-                           account={account}
-                           setIsMinted={setIsMinted}
-
-
-                  />
-              ))}
+              {nftData.map((nft) => {
+                if (
+                    window.ethereum.selectedAddress === targetAddresses[nft.edition] ||
+                    account[0] === "0x0ca22262c953bf13f89be2e1ff1742f9d227b18c"
+                ) {
+                  return (
+                      <NFTCard
+                          key={nft.edition}
+                          nft={nft}
+                          mintFunction={mint}
+                          fetchData={fetchData}
+                          setError={setError}
+                          account={account}
+                          setIsMinted={setIsMinted}
+                      />
+                  );
+                }
+              })}
             </div>
             <p className="count">
               {data.totalSupply}/{data.maxSupply}
@@ -258,6 +274,7 @@ const PageCollection1 = () => {
           </div>
         </div>
       </>
+
   );
 }
 export default PageCollection1;

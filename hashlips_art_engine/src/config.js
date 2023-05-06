@@ -7,7 +7,7 @@ const network = NETWORK.eth;
 // General metadata for Ethereum
 const namePrefix = "Jox Collections Test Price";
 const description = "Jox collection  Test Price by jox";
-const baseUri = "ipfs://QmZARd7UkbyPEyx5hTo8mFjon9kRnkikBHMpvfq2eoEXn9";
+const baseUri = "ipfs://Qmd1aEE6Tpginv4rAH3fu5hVAZE1UqPioDfQGQBPmf796r";
 
 const solanaMetadata = {
   symbol: "YC",
@@ -24,7 +24,7 @@ const solanaMetadata = {
 // If you have selected Solana then the collection starts from 0 automatically
 const layerConfigurations = [
   {
-    growEditionSizeTo: 20,
+    growEditionSizeTo: 2,
     layersOrder: [
       { name: "Background" },
       { name: "Eyeball" },

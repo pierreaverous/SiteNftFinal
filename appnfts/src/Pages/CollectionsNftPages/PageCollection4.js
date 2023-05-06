@@ -3,13 +3,18 @@ import { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 import SmartContrat from '../../artifacts/contracts/SmartContrat.sol/SmartContrat.json';
 import './CollectionsStyles.scss';
-import dataNft from '../../JSON/Collection5saisonMetadonnés.json';
+import dataNft from '../../JSON/5saisonJSON/Collection5saisonMetadonnés.json';
 import NavBar from "../../Components/NavBar/NavBar";
 import {useMinted} from "../../MintedContext";
 
 
 
-const smartcontratAdress = '0x43E9b6AB89458Ee9A7dBcc5dfca6645116cE8eAE';
+
+
+const smartcontratAdress = '0xa5a6B1309Cb413875E8D1D4f9F97f97D11C5bc3a';
+
+
+
 
 const checkMintedStatus = async (setMinted) => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -17,10 +22,12 @@ const checkMintedStatus = async (setMinted) => {
 
     const updatedMintedStatus = {};
     for (const nft of dataNft) {
+        console.log("Checking token ID:", nft.edition);
         try {
             await contract.ownerOf(nft.edition);
             updatedMintedStatus[nft.edition] = true;
         } catch (error) {
+
             updatedMintedStatus[nft.edition] = false;
         }
     }
@@ -142,8 +149,8 @@ const PageCollection4 = () => {
         getAccounts();
         setNftData(dataNft);
         setTargetAddresses({
-            1: '0x523e828681c8fd860f90fbce6795f49c5b6877df',
-            5: '0xa4ece91aeb024a85bd2a74cd3453deefddafa760',
+            1: '0x1BDd1c5a567aB35dcAA896799DBdAC6ac94c35b4',
+            2: '0x1BDd1c5a567aB35dcAA896799DBdAC6ac94c35b4',
             // Ajoutez d'autres paires d'identifiants de token et d'adresses ici
         });
         console.log(setTargetAddresses)
@@ -193,6 +200,8 @@ const PageCollection4 = () => {
                 // Récupérez le prix spécifique de l'édition NFT
                 const specificPrice = await contract.nftPrices(edition);
                 const priceToUse = specificPrice.gt(0) ? specificPrice : data.cost;
+                console.log("Minting token ID:", edition, "with price:", priceToUse.toString()); // Ajoutez cette ligne
+
 
                 const overrides = {
                     from: accounts[0],
@@ -260,17 +269,6 @@ const PageCollection4 = () => {
                                 );
                             }
                             return null;
-                            // return (
-                            //     <NFTCard
-                            //         key={nft.edition}
-                            //         nft={nft}
-                            //         mintFunction={mint}
-                            //         fetchData={fetchData}
-                            //         setError={setError}
-                            //         account={account}
-                            //         setIsMinted={setIsMinted}
-                            //     />
-                            // );
 
                         })}
                     </div>
