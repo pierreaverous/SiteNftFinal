@@ -15,7 +15,7 @@ async function main() {
 
   // We get the contract to deploy
   const SmartContrat = await hre.ethers.getContractFactory("SmartContrat");
-  const smartcontrat = await SmartContrat.deploy("Univers", "UV", "ipfs://QmQmYyP7pySnZHLK1vZZb9kQni8EUaJb4T8ijJQAEbeoxT/");
+  const smartcontrat = await SmartContrat.deploy("IngWas", "IW", "ipfs://QmVH8TfLhxEZX6rEKm2SudB4e349JuNXdzKGKoHR6T9xAb/");
 
   await smartcontrat.deployed();
 

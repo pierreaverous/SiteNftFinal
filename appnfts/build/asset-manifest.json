@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.f6bbb46b.css",
-    "main.js": "/static/js/main.f40c7a5c.js",
+    "main.css": "/static/css/main.f299d023.css",
+    "main.js": "/static/js/main.c824433e.js",
     "static/js/787.6fd142ff.chunk.js": "/static/js/787.6fd142ff.chunk.js",
     "static/media/22 Ingwas 1er.JPG": "/static/media/22 Ingwas 1er.bd7d0c6fe531d4a412aa.JPG",
     "static/media/Automne.jpg": "/static/media/Automne.d0fcb9242135bd32190d.jpg",
@@ -10,12 +10,12 @@
     "static/media/Les règles de l univers 2.jpg": "/static/media/Les règles de l univers 2.c68bd3f37aa16c55adf6.jpg",
     "static/media/logo Rémi Bénard.png": "/static/media/logo Rémi Bénard.0cf4d8014920e93e2bb0.png",
     "index.html": "/index.html",
-    "main.f6bbb46b.css.map": "/static/css/main.f6bbb46b.css.map",
-    "main.f40c7a5c.js.map": "/static/js/main.f40c7a5c.js.map",
+    "main.f299d023.css.map": "/static/css/main.f299d023.css.map",
+    "main.c824433e.js.map": "/static/js/main.c824433e.js.map",
     "787.6fd142ff.chunk.js.map": "/static/js/787.6fd142ff.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f6bbb46b.css",
-    "static/js/main.f40c7a5c.js"
+    "static/css/main.f299d023.css",
+    "static/js/main.c824433e.js"
   ]
 }

@@ -18,10 +18,10 @@ const NavBar = () =>  {
                 <div className='containerLinkPage'>
                     <div className='linkPageNav'>
                         <p className='plinkPage'>
-                            <Link  className='HeaderLink' to="https://benardremi17.wixsite.com/remi-benard">Retour Site Web</Link>
+                            <Link  className='HeaderLink' to="https://benardremi17.wixsite.com/remi-benard">Return WebSite</Link>
                         </p>
                         <p className='plinkPage'>
-                            <Link  className='HeaderLink' to="/">Accueil</Link>
+                            <Link  className='HeaderLink' to="/">Home</Link>
                         </p>
                     </div>
                     <ConnectWalletButton/>

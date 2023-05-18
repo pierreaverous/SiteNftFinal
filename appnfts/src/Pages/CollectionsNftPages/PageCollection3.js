@@ -8,7 +8,7 @@ import NavBar from "../../Components/NavBar/NavBar";
 import {useMinted} from "../../MintedContext";
 
 
-const smartcontratAdress = '0x29a453F4a165732982237898077d70F45e323a4A';
+const smartcontratAdress = '0xD0B72E49D39678D467E7C5c4C83e91F9bE741a1C';
 
 const checkMintedStatus = async (setMinted) => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -62,7 +62,7 @@ const setCost = async (newCost, fetchData, setError) => {
 };
 
 const NFTCard = ({ nft, mintFunction, setPriceFunction, fetchData, setError, account }) => {
-    const isOwner = account[0] === "0x0ca22262c953bf13f89be2e1ff1742f9d227b18c";
+    const isOwner = account[0] === "0x1bdd1c5a567ab35dcaa896799dbdac6ac94c35b4";
 
     const { minted, setMinted } = useMinted();
     const isMinted = minted[nft.edition] || false;
@@ -89,7 +89,7 @@ const NFTCard = ({ nft, mintFunction, setPriceFunction, fetchData, setError, acc
             <button onClick={() => handleMintClick(nft.edition)} disabled={isMinted}>
                 {isMinted ? "Minted" : "Mint"}
             </button>
-            {account[0] === "0x0ca22262c953bf13f89be2e1ff1742f9d227b18c" && (
+            {account[0] === "0x1bdd1c5a567ab35dcaa896799dbdac6ac94c35b4" && (
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
@@ -137,8 +137,9 @@ const PageCollection3 = () => {
         getAccounts();
         setNftData(dataNft);
         setTargetAddresses({
-            1: '0x523e828681c8fd860f90fbce6795f49c5b6877df',
-            5: '0xa4ece91aeb024a85bd2a74cd3453deefddafa760',
+            7: '0x7EcE79568850F26aC920a9FCC00a41DBCf9677F6',
+            6: '0x7EcE79568850F26aC920a9FCC00a41DBCf9677F6',
+            2: '0x7EcE79568850F26aC920a9FCC00a41DBCf9677F6',
             // Ajoutez d'autres paires d'identifiants de token et d'adresses ici
         });
         console.log(setTargetAddresses)
@@ -231,7 +232,9 @@ const PageCollection3 = () => {
                 <div className="container">
                     <div className="nft-gallery">
                         {nftData.map((nft) => {
-                            if  (window.ethereum.selectedAddress === targetAddresses[nft.edition]) {
+                            if  (window.ethereum.selectedAddress &&
+                                targetAddresses[nft.edition] &&
+                                window.ethereum.selectedAddress.toLowerCase() === targetAddresses[nft.edition].toLowerCase()) {
                                 return (
                                     <NFTCard
                                         key={nft.edition}
@@ -243,7 +246,7 @@ const PageCollection3 = () => {
                                         setIsMinted={setIsMinted}
                                     />
                                 );
-                            }else if (account[0] === "0x0ca22262c953bf13f89be2e1ff1742f9d227b18c") {
+                            }else if (account[0] === "0x1bdd1c5a567ab35dcaa896799dbdac6ac94c35b4") {
                                 return (
                                     <NFTCard
                                         key={nft.edition}
@@ -263,7 +266,7 @@ const PageCollection3 = () => {
                     <p className="count">
                         {data.totalSupply}/{data.maxSupply}
                     </p>
-                    {account[0] === "0x0ca22262c953bf13f89be2e1ff1742f9d227b18c" && (
+                    {account[0] === "0x1bdd1c5a567ab35dcaa896799dbdac6ac94c35b4" && (
                         <form onSubmit={(e) => {
                             e.preventDefault();
                             setCost(e.target.cost.value, fetchData, setError);
@@ -275,7 +278,7 @@ const PageCollection3 = () => {
                     <p className="cost">
                         Collection NFT cost {Number(data.cost) / 10 ** 18} ETH (excluding gas fees)
                     </p>
-                    {account[0] === "0x0ca22262c953bf13f89be2e1ff1742f9d227b18c" && (
+                    {account[0] === "0x1bdd1c5a567ab35dcaa896799dbdac6ac94c35b4" && (
                         <button className="withdraw" onClick={withdraw}>
                             Withdraw
                         </button>

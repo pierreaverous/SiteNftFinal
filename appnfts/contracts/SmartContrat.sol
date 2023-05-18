@@ -8,9 +8,9 @@ contract SmartContrat is ERC721Enumerable, Ownable {
 
   string public baseURI;
   string public baseExtension = ".json";
-  uint256 public cost = 0.01 ether;
-  uint256 public maxSupply = 50;
-  uint256 public maxMintAmount = 20;
+  uint256 public cost = 7.00 ether;
+  uint256 public maxSupply = 7;
+  uint256 public maxMintAmount = 1;
   bool public paused = false;
   mapping(address => bool) public whitelisted;
   mapping(uint256 => uint256) public nftPrices;

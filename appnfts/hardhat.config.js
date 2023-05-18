@@ -7,9 +7,9 @@ module.exports = {
     artifacts:'./src/artifacts'
   },
   networks:{
-    sepolia: {
-      url: "https://sepolia.infura.io/v3/5ee3592efc5842d2be9c15f5b920f0ac",
-      accounts: ['0x98c052d080b19d1877b03a5e9757774d994f89d68a1c1c3a93c53d47a4fa9625']
+    mainnet: {
+      url: "https://mainnet.infura.io/v3/5ee3592efc5842d2be9c15f5b920f0ac",
+      accounts: ['0xbd9401c0f998b9c39807cb2ebc01d69bb81b08fb22a285ff1539a125d8b7279d']
     }
   }
 };
